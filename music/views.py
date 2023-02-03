@@ -32,11 +32,3 @@ def music_detail(request, pk):
         elif request.method == 'DELETE':
             music.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)        
-#    try:
-#         music = Music.objects.get(pk=pk)
-#         serializer = MusicSerializer(music),
-#         return Response(serializer.data)   
-    
-#    except Music.DoesNotExist:
-#     return Response(status=status.HTTP_404_NOT_FOUND),
-        
