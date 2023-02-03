@@ -2,30 +2,30 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import SongSerializer
-from .models import Song
+from .serializers import MusicSerializer
+from .models import Music
 
 
 @api_view(['GET','POST', 'PUT', 'DELETE'])
-def song_list(request):
+def music_list(request):
     if request.method == 'GET':
-        music = Song.objects.all()
-        serializer = SongSerializer(music, many=True)
+        music = Music.objects.all()
+        serializer = MusicSerializer(music, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
-        serializer = SongSerializer(data=request.data)
+        serializer = MusicSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
        
 @api_view(['GET', 'PUT', 'DELETE'])    
-def song_detail(request, pk):
-        song = get_object_or_404(Song, pk=pk)
+def music_detail(request, pk):
+        song = get_object_or_404(Music, pk=pk)
         if request.method == 'GET':
-            serializer = SongSerializer(song);
+            serializer = MusicSerializer(song);
             return Response(serializer.data)
         elif request.method == 'PUT':
-            serializer = SongSerializer(song, data=request.data)
+            serializer = MusicSerializer(song, data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
